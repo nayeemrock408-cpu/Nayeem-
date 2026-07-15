@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Examination Portal — Admit Card</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/2.44.0/iconfont/tabler-icons.min.css">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="brand">
+      <div class="brand-mark">E</div>
+      <div class="brand-text">
+        <h1>Examination Cell</h1>
+        <p>Admit card portal</p>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <div class="tabs">
+        <button class="tab-btn active" id="tabStudent">Student portal</button>
+        <button class="tab-btn" id="tabAdmin">Admin portal</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="studentView">
+    <div class="hero">
+      <p class="hero-eyebrow">Semester examinations</p>
+      <h2>Retrieve your admit card</h2>
+      <p>Enter your roll number and date of birth exactly as they appear in your registration record to view and download your admit card.</p>
+    </div>
+
+    <div class="search-wrap">
+      <div class="search-card">
+        <div class="field">
+          <label for="roll">Roll number</label>
+          <input id="roll" type="text" placeholder="e.g. BWU/CSE/2201" autocomplete="off">
+          <div class="hint">As printed on your registration slip.</div>
+        </div>
+        <div class="field">
+          <label for="dob">Date of birth</label>
+          <input id="dob" type="date">
+        </div>
+        <button class="find-btn" id="findBtn">Find my admit card</button>
+      </div>
+      <div class="error-banner" id="errorBanner">
+        <div class="error-inner" id="errorText"></div>
+      </div>
+    </div>
+
+    <div class="demo-note">
+      Seed data — try roll <code>BWU/CSE/2201</code>, DOB <code>2004-03-12</code>, or roll <code>BWU/CSE/2214</code>, DOB <code>2003-11-05</code>.
+    </div>
+
+    <div class="card-wrap" id="result">
+      <div class="actions-row">
+        <button class="back-link" id="backBtn"><i class="ti ti-arrow-left"></i> New search</button>
+        <button class="print-btn" id="printBtn"><i class="ti ti-download"></i> Download / print</button>
+      </div>
+
+      <div class="ticket">
+        <div class="stub">
+          <div class="stub-dots"><span></span><span></span><span></span></div>
+          <div class="stub-roll" id="stubRoll"></div>
+          <div class="stub-dots"><span></span><span></span><span></span></div>
+        </div>
+        <div class="perf"></div>
+        <div class="ticket-body">
+          <div class="th-row">
+            <div class="th-left">
+              <h3>Admit card</h3>
+              <p id="examTitle"></p>
+            </div>
+            <div class="seal"><i class="ti ti-stamp"></i><span>Official</span></div>
+          </div>
+
+          <div class="id-row">
+            <div class="photo-box" id="photoInitials"></div>
+            <div class="id-grid">
+              <div class="item"><label>Name</label><div id="stName"></div></div>
+              <div class="item mono"><label>Roll number</label><div id="stRoll"></div></div>
+              <div class="item"><label>Course</label><div id="stCourse"></div></div>
+              <div class="item"><label>Semester</label><div id="stSem"></div></div>
+              <div class="item"><label>Date of birth</label><div id="stDob"></div></div>
+              <div class="item"><label>Exam centre</label><div id="stCentre"></div></div>
+            </div>
+          </div>
+
+          <p class="schedule-label">Examination schedule</p>
+          <table class="schedule">
+            <thead><tr><th>Subject</th><th>Date</th><th>Time</th></tr></thead>
+            <tbody id="scheduleBody"></tbody>
+          </table>
+
+          <div class="footer-row">
+            <div class="verified"><i class="ti ti-check"></i> Verified record</div>
+            <div class="barcode" id="barcode"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="instructions">
+        <p>Instructions</p>
+        <ul>
+          <li>Carry a printed copy of this admit card along with a valid photo ID to the examination centre.</li>
+          <li>Report to the centre at least 30 minutes before the scheduled time.</li>
+          <li>Electronic devices are not permitted inside the examination hall.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div id="adminView" style="display:none">
+    <div class="admin-hero">
+      <p class="hero-eyebrow">Examination cell</p>
+      <h2>Admit card records</h2>
+      <p>Add or remove student admit card entries. New entries become searchable in the student portal immediately.</p>
+    </div>
+
+    <div class="gate-wrap" id="gateWrap">
+      <div class="search-card">
+        <div class="field">
+          <label for="adminCode">Admin access code</label>
+          <input id="adminCode" type="password" placeholder="Enter access code" autocomplete="off">
+          <div class="hint">Default seed code: <code>admin123</code> — change it in <code>data/admin.json</code>.</div>
+        </div>
+        <button class="find-btn" id="unlockBtn">Unlock admin portal</button>
+      </div>
+      <div class="error-banner" id="adminErrorBanner">
+        <div class="error-inner" id="adminErrorText"></div>
+      </div>
+    </div>
+
+    <div class="admin-panel" id="adminPanel" style="display:none">
+      <div class="admin-grid">
+        <div class="admin-card">
+          <p class="panel-title">New admit card entry</p>
+
+          <div class="field-row">
+            <div class="field"><label for="fRoll">Roll number</label><input id="fRoll" type="text" placeholder="BWU/CSE/2230"></div>
+            <div class="field"><label for="fDob">Date of birth</label><input id="fDob" type="date"></div>
+          </div>
+          <div class="field"><label for="fName">Student name</label><input id="fName" type="text" placeholder="Full name"></div>
+          <div class="field-row">
+            <div class="field"><label for="fCourse">Course</label><input id="fCourse" type="text" placeholder="B.Tech Computer Science"></div>
+            <div class="field"><label for="fSem">Semester</label><input id="fSem" type="text" placeholder="6th semester"></div>
+          </div>
+          <div class="field"><label for="fCentre">Exam centre</label><input id="fCentre" type="text" placeholder="Block C, Examination Hall 2"></div>
+
+          <p class="panel-title" style="margin-top:18px;">Subjects</p>
+          <div id="subjectRows"></div>
+          <button class="add-row-btn" id="addSubjectBtn" type="button"><i class="ti ti-plus"></i> Add subject</button>
+
+          <div class="error-banner" id="formErrorBanner">
+            <div class="error-inner" id="formErrorText"></div>
+          </div>
+          <div class="success-banner" id="formSuccessBanner">Record saved.</div>
+
+          <button class="find-btn" id="saveRecordBtn" style="margin-top:16px;">Save admit card record</button>
+        </div>
+
+        <div class="admin-card">
+          <p class="panel-title">Existing records <span class="count-pill" id="recordCount"></span></p>
+          <div class="record-list" id="recordList"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script src="/app.js"></script>
+</body>
+</html>

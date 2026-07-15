@@ -1,0 +1,62 @@
+[
+  {
+    "roll": "BWU/CSE/2201",
+    "dob": "2004-03-12",
+    "name": "Ariana Sen",
+    "course": "B.Tech Computer Science",
+    "semester": "6th semester",
+    "centre": "Block C, Examination Hall 2",
+    "subjects": [
+      {
+        "name": "Operating Systems",
+        "date": "18 Aug 2026",
+        "time": "10:00 AM"
+      },
+      {
+        "name": "Computer Networks",
+        "date": "20 Aug 2026",
+        "time": "10:00 AM"
+      },
+      {
+        "name": "Database Management",
+        "date": "22 Aug 2026",
+        "time": "2:00 PM"
+      },
+      {
+        "name": "Software Engineering",
+        "date": "25 Aug 2026",
+        "time": "10:00 AM"
+      }
+    ]
+  },
+  {
+    "roll": "BWU/CSE/2214",
+    "dob": "2003-11-05",
+    "name": "Rohan Dutta",
+    "course": "B.Tech Computer Science",
+    "semester": "6th semester",
+    "centre": "Block A, Examination Hall 1",
+    "subjects": [
+      {
+        "name": "Operating Systems",
+        "date": "18 Aug 2026",
+        "time": "10:00 AM"
+      },
+      {
+        "name": "Computer Networks",
+        "date": "20 Aug 2026",
+        "time": "10:00 AM"
+      },
+      {
+        "name": "Database Management",
+        "date": "22 Aug 2026",
+        "time": "2:00 PM"
+      },
+      {
+        "name": "Software Engineering",
+        "date": "25 Aug 2026",
+        "time": "10:00 AM"
+      }
+    ]
+  }
+]
